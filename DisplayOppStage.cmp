@@ -1,0 +1,47 @@
+<aura:component implements = "flexipage:availableForAllPageTypes,
+    flexipage:availableForRecordHome,force:hasRecordId" access = "global">
+
+    <aura:attribute name="opportunity" type="Object"
+      description="The opportunity record to be displayed" />
+    <aura:attribute name="oppRecord" type="Object"
+      description="A simplified view record object to be displayed" />
+    <aura:attribute name="recordError" type="String"
+      description="An error message bound to force:recordData" />
+
+    <lightning:card title="Display Stage : Load Record">
+        <force:recordData aura:id="record"
+            layoutType="FULL"
+            recordId="{!v.recordId}"
+            targetError="{!v.recordError}"
+            targetRecord="{!v.opportunity}"
+            targetFields="{!v.oppRecord}"
+            fields="StageName"
+            mode="VIEW"
+        />
+
+        <div class="slds-form--stacked slds-tile slds-m-horizontal_small">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Amount: </label>
+                <div class="slds-form-element__control">
+                    <ui:outputCurrency class = "slds-input"
+                        value = "{!v.oppRecord.Amount}" />
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" >Close Date : </label>
+                <div class="slds-form-element__control">
+                    <ui:outputDate class="slds-input"
+                        value="{!v.oppRecord.CloseDate}" />
+                </div>
+            </div>
+            <div class="slds-form-element">
+                <label class="slds-form-element__label">Stage : </label>
+                <div class="slds-form-element__control">
+                    <ui:outputText class="slds-input"
+                        value="{!v.oppRecord.StageName}" />
+                </div>
+            </div>
+        </div>
+
+    </lightning:card>
+</aura:component>
